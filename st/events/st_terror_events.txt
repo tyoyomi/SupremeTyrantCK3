@@ -1,0 +1,22 @@
+namespace = st_terror
+
+# Reign of Terror yearly pulse toast
+st_terror.1001 = {
+	type = character_event
+	title = st_terror.1001.t
+	desc = st_terror.1001.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_cruel
+	}
+	right_portrait = {
+		character = scope:st_reign_victim
+		trigger = { exists = scope:st_reign_victim }
+		animation = fear
+	}
+
+	option = {
+		name = st_terror.1001.a
+	}
+}

@@ -1,0 +1,108 @@
+st_rule_intensity_default = {
+	categories = {
+		tweaks
+	}
+
+	default = st_rule_intensity_default_high
+
+	st_rule_intensity_default_low = {
+	}
+
+	st_rule_intensity_default_mid = {
+	}
+
+	st_rule_intensity_default_high = {
+		flag = blocks_achievements
+	}
+}
+
+st_rule_granting = {
+	categories = {
+		tweaks
+		ai
+	}
+
+	default = st_rule_granting_player_self
+
+	st_rule_granting_player_self = {
+	}
+
+	st_rule_granting_player_and_targets = {
+		flag = blocks_achievements
+	}
+
+	st_rule_granting_disabled = {
+	}
+}
+
+st_rule_ai = {
+	categories = {
+		tweaks
+		ai
+	}
+
+	default = st_rule_ai_disabled
+
+	st_rule_ai_disabled = {
+	}
+
+	st_rule_ai_follow_intensity = {
+		flag = blocks_achievements
+	}
+}
+
+st_rule_module_absolute_tyranny = {
+	categories = { tweaks }
+	default = st_rule_module_absolute_tyranny_on
+	st_rule_module_absolute_tyranny_on = { flag = blocks_achievements }
+	st_rule_module_absolute_tyranny_off = {}
+}
+
+st_rule_module_crush_dissent = {
+	categories = { tweaks }
+	default = st_rule_module_crush_dissent_on
+	st_rule_module_crush_dissent_on = { flag = blocks_achievements }
+	st_rule_module_crush_dissent_off = {}
+}
+
+st_rule_module_execution = {
+	categories = { tweaks }
+	default = st_rule_module_execution_on
+	st_rule_module_execution_on = { flag = blocks_achievements }
+	st_rule_module_execution_off = {}
+}
+
+st_rule_module_arrest = {
+	categories = { tweaks }
+	default = st_rule_module_arrest_on
+	st_rule_module_arrest_on = { flag = blocks_achievements }
+	st_rule_module_arrest_off = {}
+}
+
+st_rule_module_reign_pulse = {
+	categories = { tweaks }
+	default = st_rule_module_reign_pulse_on
+	st_rule_module_reign_pulse_on = { flag = blocks_achievements }
+	st_rule_module_reign_pulse_off = {}
+}
+
+st_rule_module_confiscate = {
+	categories = { tweaks }
+	default = st_rule_module_confiscate_on
+	st_rule_module_confiscate_on = { flag = blocks_achievements }
+	st_rule_module_confiscate_off = {}
+}
+
+st_rule_module_oath = {
+	categories = { tweaks }
+	default = st_rule_module_oath_on
+	st_rule_module_oath_on = { flag = blocks_achievements }
+	st_rule_module_oath_off = {}
+}
+
+st_rule_module_mass_terror = {
+	categories = { tweaks }
+	default = st_rule_module_mass_terror_on
+	st_rule_module_mass_terror_on = { flag = blocks_achievements }
+	st_rule_module_mass_terror_off = {}
+}

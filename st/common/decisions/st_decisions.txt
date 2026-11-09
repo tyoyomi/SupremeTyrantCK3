@@ -1,0 +1,97 @@
+st_embrace_supreme_tyrant_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+	decision_group_type = major
+	desc = st_embrace_supreme_tyrant_decision_desc
+	selection_tooltip = st_embrace_supreme_tyrant_decision_tooltip
+	confirm_text = st_embrace_supreme_tyrant_decision_confirm
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_alive = yes
+		is_ai = no
+		NOT = { has_game_rule = st_rule_granting_disabled }
+		NOT = { has_trait = st_supreme_tyrant }
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = st_tt_can_embrace
+			st_can_embrace_tyrant = yes
+		}
+	}
+
+	effect = {
+		custom_tooltip = st_embrace_supreme_tyrant_decision_effect_tt
+		st_embrace_supreme_tyrant_effect = yes
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+st_renounce_supreme_tyrant_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+	decision_group_type = major
+	desc = st_renounce_supreme_tyrant_decision_desc
+	selection_tooltip = st_renounce_supreme_tyrant_decision_tooltip
+	confirm_text = st_renounce_supreme_tyrant_decision_confirm
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_alive = yes
+		is_ai = no
+		has_trait = st_supreme_tyrant
+	}
+
+	is_valid = {
+		has_trait = st_supreme_tyrant
+	}
+
+	effect = {
+		custom_tooltip = st_renounce_supreme_tyrant_decision_effect_tt
+		st_renounce_supreme_tyrant_effect = yes
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+st_manage_silence_the_realm_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+	decision_group_type = major
+	desc = st_manage_silence_the_realm_decision_desc
+	selection_tooltip = st_manage_silence_the_realm_decision_tooltip
+	confirm_text = st_manage_silence_the_realm_decision_confirm
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_alive = yes
+		NOT = { has_game_rule = st_rule_granting_disabled }
+		OR = {
+			is_ai = no
+			has_game_rule = st_rule_ai_follow_intensity
+		}
+	}
+
+	is_valid = {
+		always = yes
+	}
+
+	effect = {
+		custom_tooltip = st_manage_silence_the_realm_decision_effect_tt
+		st_ensure_tyrant_defaults_effect = yes
+		trigger_event = st_settings.1001
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}

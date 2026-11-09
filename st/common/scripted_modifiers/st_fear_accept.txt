@@ -1,0 +1,21 @@
+# Supreme Tyrant — fear-accept weight pack (additive helper)
+# Used by Tyrant verbs' ai_accept. Vanilla Yes Man LIOS stays soft-peer Death Stare.
+# Do not grant or spend hooks.
+
+st_fear_ai_accept_modifier = {
+	modifier = {
+		add = 40
+		desc = st_tt_fear_accept_cowed
+		st_is_cowed_by_actor = yes
+	}
+	modifier = {
+		add = 60
+		desc = st_tt_fear_accept_oath
+		st_recipient_has_oath_to_actor = yes
+	}
+	modifier = {
+		add = 25
+		desc = st_tt_fear_accept_dread
+		scope:actor = { dread >= 50 }
+	}
+}
