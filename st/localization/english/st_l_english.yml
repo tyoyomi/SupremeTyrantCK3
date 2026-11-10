@@ -44,6 +44,9 @@
  st_manage_silence_the_realm_decision_confirm:0 "Open Hub"
  st_manage_silence_the_realm_decision_effect_tt:0 "Opens the Silence the Realm hub"
 
+ # Decision group
+ decision_group_type_st_tyrant:0 "Supreme Tyrant"
+
  # Interactions
  st_grant_supreme_tyrant_interaction:0 "Grant Supreme Tyrant"
  st_grant_supreme_tyrant_interaction_desc:0 "Bestow the Supreme Tyrant mantle on a child or grandchild. Available when the granting rule allows targets."
