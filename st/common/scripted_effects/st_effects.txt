@@ -1,0 +1,857 @@
+# Supreme Tyrant — scripted effects
+# Heavy logic lives here; interactions / decisions / events stay thin.
+
+@st_oath_dread_floor = 20
+@st_mass_terror_dread = 25
+@st_spread_terror_dread = 8
+
+### Defaults / refresh / cycle
+st_ensure_tyrant_defaults_effect = {
+	if = {
+		limit = { NOT = { exists = var:st_cfg_intensity } }
+		if = {
+			limit = { has_game_rule = st_rule_intensity_default_low }
+			set_variable = { name = st_cfg_intensity value = 1 }
+		}
+		else_if = {
+			limit = { has_game_rule = st_rule_intensity_default_mid }
+			set_variable = { name = st_cfg_intensity value = 2 }
+		}
+		else = {
+			set_variable = { name = st_cfg_intensity value = 3 }
+		}
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_absolute_tyranny } }
+		if = {
+			limit = { has_game_rule = st_rule_module_absolute_tyranny_off }
+			set_variable = { name = st_cfg_module_absolute_tyranny value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_absolute_tyranny value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_crush_dissent } }
+		if = {
+			limit = { has_game_rule = st_rule_module_crush_dissent_off }
+			set_variable = { name = st_cfg_module_crush_dissent value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_crush_dissent value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_execution } }
+		if = {
+			limit = { has_game_rule = st_rule_module_execution_off }
+			set_variable = { name = st_cfg_module_execution value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_execution value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_arrest } }
+		if = {
+			limit = { has_game_rule = st_rule_module_arrest_off }
+			set_variable = { name = st_cfg_module_arrest value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_arrest value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_reign_pulse } }
+		if = {
+			limit = { has_game_rule = st_rule_module_reign_pulse_off }
+			set_variable = { name = st_cfg_module_reign_pulse value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_reign_pulse value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_confiscate } }
+		if = {
+			limit = { has_game_rule = st_rule_module_confiscate_off }
+			set_variable = { name = st_cfg_module_confiscate value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_confiscate value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_oath } }
+		if = {
+			limit = { has_game_rule = st_rule_module_oath_off }
+			set_variable = { name = st_cfg_module_oath value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_oath value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cfg_module_mass_terror } }
+		if = {
+			limit = { has_game_rule = st_rule_module_mass_terror_off }
+			set_variable = { name = st_cfg_module_mass_terror value = 0 }
+		}
+		else = { set_variable = { name = st_cfg_module_mass_terror value = 1 } }
+	}
+	if = {
+		limit = { NOT = { exists = var:st_cowed_count } }
+		set_variable = { name = st_cowed_count value = 0 }
+	}
+}
+
+st_clear_tyrant_modifiers_effect = {
+	remove_character_modifier = st_tyranny_low_modifier
+	remove_character_modifier = st_tyranny_med_modifier
+	remove_character_modifier = st_tyranny_high_modifier
+}
+
+st_refresh_tyrant_modifiers_effect = {
+	st_clear_tyrant_modifiers_effect = yes
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = {
+			has_trait = st_supreme_tyrant
+			st_module_absolute_tyranny_on = yes
+		}
+		if = {
+			limit = { var:st_cfg_intensity = 1 }
+			add_character_modifier = {
+				modifier = st_tyranny_low_modifier
+				days = -1
+			}
+		}
+		else_if = {
+			limit = { var:st_cfg_intensity = 2 }
+			add_character_modifier = {
+				modifier = st_tyranny_med_modifier
+				days = -1
+			}
+		}
+		else = {
+			add_character_modifier = {
+				modifier = st_tyranny_high_modifier
+				days = -1
+			}
+		}
+	}
+}
+
+st_cycle_intensity_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_intensity = 1 }
+		set_variable = { name = st_cfg_intensity value = 2 }
+	}
+	else_if = {
+		limit = { var:st_cfg_intensity = 2 }
+		set_variable = { name = st_cfg_intensity value = 3 }
+	}
+	else = {
+		set_variable = { name = st_cfg_intensity value = 1 }
+	}
+	st_refresh_tyrant_modifiers_effect = yes
+}
+
+st_cycle_module_absolute_tyranny_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_absolute_tyranny = 1 }
+		set_variable = { name = st_cfg_module_absolute_tyranny value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_absolute_tyranny value = 1 } }
+	st_refresh_tyrant_modifiers_effect = yes
+}
+
+st_cycle_module_crush_dissent_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_crush_dissent = 1 }
+		set_variable = { name = st_cfg_module_crush_dissent value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_crush_dissent value = 1 } }
+}
+
+st_cycle_module_execution_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_execution = 1 }
+		set_variable = { name = st_cfg_module_execution value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_execution value = 1 } }
+}
+
+st_cycle_module_arrest_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_arrest = 1 }
+		set_variable = { name = st_cfg_module_arrest value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_arrest value = 1 } }
+}
+
+st_cycle_module_reign_pulse_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_reign_pulse = 1 }
+		set_variable = { name = st_cfg_module_reign_pulse value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_reign_pulse value = 1 } }
+}
+
+st_cycle_module_confiscate_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_confiscate = 1 }
+		set_variable = { name = st_cfg_module_confiscate value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_confiscate value = 1 } }
+}
+
+st_cycle_module_oath_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_oath = 1 }
+		set_variable = { name = st_cfg_module_oath value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_oath value = 1 } }
+}
+
+st_cycle_module_mass_terror_cfg_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = { var:st_cfg_module_mass_terror = 1 }
+		set_variable = { name = st_cfg_module_mass_terror value = 0 }
+	}
+	else = { set_variable = { name = st_cfg_module_mass_terror value = 1 } }
+}
+
+### Bound cowed list helpers (O(bound) only)
+st_increment_cowed_count_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	change_variable = { name = st_cowed_count add = 1 }
+}
+
+st_decrement_cowed_count_effect = {
+	st_ensure_tyrant_defaults_effect = yes
+	if = {
+		limit = {
+			exists = var:st_cowed_count
+			var:st_cowed_count > 0
+		}
+		change_variable = { name = st_cowed_count subtract = 1 }
+	}
+}
+
+st_bind_cowed_target_effect = {
+	# this = tyrant; scope:recipient = cowed target
+	if = {
+		limit = {
+			NOT = {
+				is_target_in_variable_list = {
+					name = st_bound_cowed
+					target = scope:recipient
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = st_bound_cowed
+			target = scope:recipient
+		}
+		st_increment_cowed_count_effect = yes
+	}
+}
+
+st_unbind_cowed_target_effect = {
+	# this = tyrant; scope:recipient = former cowed
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = st_bound_cowed
+				target = scope:recipient
+			}
+		}
+		remove_list_variable = {
+			name = st_bound_cowed
+			target = scope:recipient
+		}
+		st_decrement_cowed_count_effect = yes
+	}
+}
+
+### Cooldown helpers (Low ~1y / Mid ~180d / High ~30–90d; Mass Terror longer)
+st_apply_arrest_cd_effect = {
+	if = {
+		limit = { st_intensity_is_low = yes }
+		add_character_flag = { flag = st_arrest_cd years = 1 }
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_arrest_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_arrest_cd days = 45 }
+	}
+}
+
+st_apply_execution_cd_effect = {
+	if = {
+		limit = { st_intensity_is_low = yes }
+		add_character_flag = { flag = st_execution_cd years = 1 }
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_execution_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_execution_cd days = 60 }
+	}
+}
+
+st_apply_crush_cd_effect = {
+	if = {
+		limit = { st_intensity_is_low = yes }
+		add_character_flag = { flag = st_crush_cd years = 1 }
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_crush_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_crush_cd days = 90 }
+	}
+}
+
+st_apply_confiscate_cd_effect = {
+	if = {
+		limit = { st_intensity_is_low = yes }
+		add_character_flag = { flag = st_confiscate_cd years = 1 }
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_confiscate_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_confiscate_cd days = 60 }
+	}
+}
+
+st_apply_oath_cd_effect = {
+	if = {
+		limit = { st_intensity_is_low = yes }
+		add_character_flag = { flag = st_oath_cd years = 1 }
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_oath_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_oath_cd days = 90 }
+	}
+}
+
+st_apply_mass_terror_cd_effect = {
+	# Longer than other major verbs
+	if = {
+		limit = { st_intensity_is_high = yes }
+		add_character_flag = { flag = st_mass_terror_cd years = 2 }
+	}
+	else = {
+		add_character_flag = { flag = st_mass_terror_cd years = 3 }
+	}
+}
+
+st_apply_spread_terror_cd_effect = {
+	if = {
+		limit = { st_intensity_is_mid = yes }
+		add_character_flag = { flag = st_spread_terror_cd days = 180 }
+	}
+	else = {
+		add_character_flag = { flag = st_spread_terror_cd days = 90 }
+	}
+}
+
+### Soft tyranny land (Absolute Tyranny) — High ≈ 0
+st_soft_land_tyranny_effect = {
+	# this = actor
+	if = {
+		limit = {
+			st_module_absolute_tyranny_on = yes
+			st_tyranny_soft_land_value > 0
+		}
+		add_tyranny = st_tyranny_soft_land_value
+	}
+	else_if = {
+		limit = { NOT = { st_module_absolute_tyranny_on = yes } }
+		add_tyranny = 15
+	}
+	# High + module On: near-immunity — no add_tyranny
+}
+
+### Cowed apply / clear
+st_clear_cowed_effect = {
+	# this = cowed character
+	save_scope_as = recipient
+	if = {
+		limit = {
+			exists = var:st_cowed_by
+			var:st_cowed_by = { is_alive = yes }
+		}
+		var:st_cowed_by = {
+			st_unbind_cowed_target_effect = yes
+		}
+	}
+	remove_character_modifier = st_cowed_modifier
+	remove_variable = st_cowed_by
+	remove_character_flag = st_is_cowed
+}
+
+st_apply_cowed_effect = {
+	# this = recipient; expects scope:actor = tyrant
+	# Non-stacking refresh: clear prior Tyrant cow first (Death Stare soft peer stays separate)
+	if = {
+		limit = { has_character_modifier = st_cowed_modifier }
+		remove_character_modifier = st_cowed_modifier
+		remove_variable = st_cowed_by
+		remove_character_flag = st_is_cowed
+	}
+	set_variable = {
+		name = st_cowed_by
+		value = scope:actor
+	}
+	add_character_flag = st_is_cowed
+	add_character_modifier = {
+		modifier = st_cowed_modifier
+		days = st_cowed_duration_days_value
+	}
+	add_opinion = {
+		target = scope:actor
+		modifier = st_cowed_fear_opinion
+	}
+	scope:actor = {
+		st_bind_cowed_target_effect = yes
+	}
+}
+
+### Oath of Fear
+st_clear_oath_of_fear_effect = {
+	# this = oath subject
+	remove_character_modifier = st_oath_of_fear_modifier
+	remove_variable = st_oath_to
+	remove_character_flag = st_has_oath_of_fear
+}
+
+st_force_oath_of_fear_effect = {
+	# expects scope:actor / scope:recipient
+	scope:recipient = {
+		st_clear_oath_of_fear_effect = yes
+		set_variable = {
+			name = st_oath_to
+			value = scope:actor
+		}
+		add_character_flag = st_has_oath_of_fear
+		add_character_modifier = {
+			modifier = st_oath_of_fear_modifier
+			days = st_oath_duration_days_value
+		}
+		add_opinion = {
+			target = scope:actor
+			modifier = st_oath_of_fear_opinion
+		}
+		# Mild cow refresh so fear theater sticks
+		st_apply_cowed_effect = yes
+	}
+	scope:actor = {
+		st_apply_oath_cd_effect = yes
+		add_dread = st_dread_splash_value
+		trigger_event = st_events.2501
+	}
+}
+
+st_oath_hygiene_yearly_effect = {
+	# Clear oaths when actor dread drops below floor — O(bound) via cowed/oath lists when possible
+	# Scan direct vassals with oath toward this tyrant only
+	if = {
+		limit = {
+			st_is_supreme_tyrant = yes
+			dread < @st_oath_dread_floor
+		}
+		every_vassal = {
+			limit = {
+				has_character_modifier = st_oath_of_fear_modifier
+				exists = var:st_oath_to
+				var:st_oath_to = prev
+			}
+			st_clear_oath_of_fear_effect = yes
+		}
+	}
+}
+
+### Grant / revoke
+st_embrace_supreme_tyrant_silent_effect = {
+	add_trait = st_supreme_tyrant
+	st_ensure_tyrant_defaults_effect = yes
+	st_refresh_tyrant_modifiers_effect = yes
+}
+
+st_embrace_supreme_tyrant_effect = {
+	st_embrace_supreme_tyrant_silent_effect = yes
+	save_scope_as = st_tyrant
+	trigger_event = st_events.1001
+}
+
+st_renounce_supreme_tyrant_silent_effect = {
+	st_clear_tyrant_modifiers_effect = yes
+	# Clear oaths pointing at this tyrant (direct vassals only)
+	every_vassal = {
+		limit = {
+			has_character_modifier = st_oath_of_fear_modifier
+			exists = var:st_oath_to
+			var:st_oath_to = prev
+		}
+		st_clear_oath_of_fear_effect = yes
+	}
+	# Hygiene cowed binder — clear mods first, then drop the list (avoid unbind-while-iterating)
+	every_in_list = {
+		variable = st_bound_cowed
+		limit = { is_alive = yes }
+		remove_character_modifier = st_cowed_modifier
+		remove_variable = st_cowed_by
+		remove_character_flag = st_is_cowed
+	}
+	clear_variable_list = st_bound_cowed
+	set_variable = { name = st_cowed_count value = 0 }
+	if = {
+		limit = { has_trait = st_supreme_tyrant }
+		remove_trait = st_supreme_tyrant
+	}
+}
+
+st_renounce_supreme_tyrant_effect = {
+	st_renounce_supreme_tyrant_silent_effect = yes
+	save_scope_as = st_tyrant
+	trigger_event = st_events.1002
+}
+
+st_on_death_cleanup_effect = {
+	# this = dead character
+	if = {
+		limit = { has_trait = st_supreme_tyrant }
+		st_renounce_supreme_tyrant_silent_effect = yes
+	}
+	if = {
+		limit = { st_character_is_cowed_trigger = yes }
+		st_clear_cowed_effect = yes
+	}
+	if = {
+		limit = { st_has_oath_of_fear = yes }
+		st_clear_oath_of_fear_effect = yes
+	}
+}
+
+### 4 — Arbitrary Arrest
+st_arbitrary_arrest_effect = {
+	# expects scope:actor / scope:recipient
+	scope:actor = {
+		imprison = {
+			target = scope:recipient
+			type = dungeon
+		}
+	}
+	scope:recipient = {
+		add_opinion = {
+			target = scope:actor
+			modifier = st_arbitrary_arrest_opinion
+		}
+	}
+	scope:actor = {
+		st_soft_land_tyranny_effect = yes
+		add_dread = st_dread_splash_value
+		st_apply_arrest_cd_effect = yes
+		trigger_event = st_events.2001
+	}
+}
+
+### 3 — Public Execution Spectacle
+st_public_execution_dread_splash_effect = {
+	# this = actor; intensity-scaled bound lists
+	add_dread = st_execution_dread_value
+	if = {
+		limit = { st_intensity_is_low = yes }
+		every_courtier = {
+			limit = {
+				is_alive = yes
+				NOT = { this = prev }
+			}
+			add_opinion = {
+				target = prev
+				modifier = st_spectacle_terror_opinion
+			}
+		}
+	}
+	else_if = {
+		limit = { st_intensity_is_mid = yes }
+		every_vassal = {
+			limit = { is_alive = yes }
+			add_opinion = {
+				target = prev
+				modifier = st_spectacle_terror_opinion
+			}
+		}
+		every_courtier = {
+			limit = {
+				is_alive = yes
+				NOT = { this = prev }
+			}
+			add_opinion = {
+				target = prev
+				modifier = st_spectacle_terror_opinion
+			}
+		}
+	}
+	else = {
+		# High: direct vassals + courtiers (still O(bound), not world scan)
+		every_vassal = {
+			limit = { is_alive = yes }
+			add_opinion = {
+				target = prev
+				modifier = st_spectacle_terror_opinion
+			}
+			# Mild cow splash on a few — random sample via random_vassal after loop set
+		}
+		every_courtier = {
+			limit = {
+				is_alive = yes
+				NOT = { this = prev }
+			}
+			add_opinion = {
+				target = prev
+				modifier = st_spectacle_terror_opinion
+			}
+		}
+		random_vassal = {
+			limit = { is_alive = yes is_adult = yes }
+			save_scope_as = recipient
+			st_apply_cowed_effect = yes
+		}
+	}
+}
+
+st_public_execution_effect = {
+	# expects scope:actor / scope:recipient (prisoner)
+	scope:recipient = {
+		death = {
+			death_reason = death_execution
+			killer = scope:actor
+		}
+	}
+	scope:actor = {
+		st_soft_land_tyranny_effect = yes
+		st_public_execution_dread_splash_effect = yes
+		st_apply_execution_cd_effect = yes
+		trigger_event = st_events.2101
+	}
+}
+
+### 2 — Crush Dissent
+st_crush_dissent_effect = {
+	# expects scope:actor / scope:recipient (faction member or leader against actor)
+	scope:recipient = {
+		if = {
+			limit = { exists = joined_faction }
+			joined_faction = {
+				every_faction_member = {
+					limit = { is_alive = yes }
+					# Leave + Crushed + dread theater (honest soft dissolve)
+					leave_faction = yes
+					add_character_modifier = {
+						modifier = st_crushed_modifier
+						days = st_crushed_duration_days_value
+					}
+					add_opinion = {
+						target = scope:actor
+						modifier = st_crushed_dissent_opinion
+					}
+					save_scope_as = recipient
+					st_apply_cowed_effect = yes
+				}
+			}
+		}
+		else = {
+			add_character_modifier = {
+				modifier = st_crushed_modifier
+				days = st_crushed_duration_days_value
+			}
+			save_scope_as = recipient
+			st_apply_cowed_effect = yes
+		}
+	}
+	scope:actor = {
+		add_dread = st_dread_splash_value
+		st_apply_crush_cd_effect = yes
+		trigger_event = st_events.2201
+	}
+}
+
+st_crush_active_dissent_hub_effect = {
+	# this = tyrant; iterate direct vassals in factions against player (O(vassals))
+	# Prefer faction leaders so each faction is crushed once
+	save_scope_as = actor
+	every_vassal = {
+		limit = {
+			is_alive = yes
+			exists = joined_faction
+			joined_faction = {
+				faction_target = prev
+				faction_leader = prev
+			}
+		}
+		save_scope_as = recipient
+		st_crush_dissent_effect = yes
+	}
+}
+
+### 6 — Confiscate Under Dread (title revoke path; not Keep Titles)
+st_confiscate_under_dread_effect = {
+	# expects scope:actor / scope:recipient
+	# Prefer a county that is not their only landless-safe last title when possible
+	scope:recipient = {
+		random_held_title = {
+			limit = {
+				tier = tier_county
+				is_landless_type_title = no
+				# Prefer non-capital when Mid+; Low still takes a county if available
+				trigger_if = {
+					limit = {
+						scope:actor = { NOT = { st_intensity_is_high = yes } }
+						scope:recipient = { exists = capital_county }
+					}
+					NOT = { this = scope:recipient.capital_county }
+				}
+			}
+			save_scope_as = st_confiscate_title
+		}
+		# Fallback: any held county
+		if = {
+			limit = { NOT = { exists = scope:st_confiscate_title } }
+			random_held_title = {
+				limit = {
+					tier = tier_county
+					is_landless_type_title = no
+				}
+				save_scope_as = st_confiscate_title
+			}
+		}
+	}
+	if = {
+		limit = { exists = scope:st_confiscate_title }
+		create_title_and_vassal_change = {
+			type = revoked
+			save_scope_as = st_title_change
+			add_claim_on_loss = no
+		}
+		scope:st_confiscate_title = {
+			change_title_holder = {
+				holder = scope:actor
+				change = scope:st_title_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:st_title_change
+	}
+	scope:recipient = {
+		add_opinion = {
+			target = scope:actor
+			modifier = st_confiscated_under_dread_opinion
+		}
+		st_apply_cowed_effect = yes
+	}
+	scope:actor = {
+		st_soft_land_tyranny_effect = yes
+		add_dread = st_dread_splash_value
+		st_apply_confiscate_cd_effect = yes
+		trigger_event = st_events.2301
+	}
+}
+
+### 9 — Mass Terror
+st_mass_terror_effect = {
+	# this = tyrant; short cowed on all direct vassals
+	save_scope_as = actor
+	every_vassal = {
+		limit = {
+			is_alive = yes
+			is_adult = yes
+		}
+		save_scope_as = recipient
+		st_apply_cowed_effect = yes
+	}
+	add_dread = @st_mass_terror_dread
+	st_apply_mass_terror_cd_effect = yes
+	trigger_event = st_events.2401
+}
+
+st_mass_terror_faction_members_effect = {
+	# Optional hub: cow current player-vassal-faction members only
+	save_scope_as = actor
+	every_vassal = {
+		limit = {
+			is_alive = yes
+			is_adult = yes
+			exists = joined_faction
+			joined_faction = {
+				faction_target = prev
+			}
+		}
+		save_scope_as = recipient
+		st_apply_cowed_effect = yes
+	}
+	add_dread = @st_mass_terror_dread
+	st_apply_mass_terror_cd_effect = yes
+	trigger_event = st_events.2402
+}
+
+st_spread_terror_effect = {
+	# Mild Mid+ drip — short dread tick to direct vassals (distinct from Mass Terror)
+	save_scope_as = actor
+	add_dread = @st_spread_terror_dread
+	every_vassal = {
+		limit = { is_alive = yes is_adult = yes }
+		add_opinion = {
+			target = scope:actor
+			modifier = st_cowed_fear_opinion
+		}
+	}
+	# Cow one random direct vassal
+	random_vassal = {
+		limit = { is_alive = yes is_adult = yes }
+		save_scope_as = recipient
+		st_apply_cowed_effect = yes
+	}
+	st_apply_spread_terror_cd_effect = yes
+	trigger_event = st_events.2403
+}
+
+### 5 — Reign of Terror yearly pulse
+st_reign_of_terror_yearly_pulse = {
+	# on_action effect root = playable
+	if = {
+		limit = {
+			st_is_supreme_tyrant = yes
+			st_module_reign_pulse_on = yes
+			st_ai_may_use_tyrant = yes
+		}
+		save_scope_as = actor
+		add_dread = st_reign_dread_value
+		# Mild prestige theater (legitimacy APIs vary by government — keep prestige-safe)
+		if = {
+			limit = { st_intensity_is_high = yes }
+			add_prestige = 50
+		}
+		else_if = {
+			limit = { st_intensity_is_mid = yes }
+			add_prestige = 25
+		}
+		else = {
+			add_prestige = 10
+		}
+		# One random cowed direct vassal
+		random_vassal = {
+			limit = { is_alive = yes is_adult = yes }
+			save_scope_as = recipient
+			st_apply_cowed_effect = yes
+			save_scope_as = st_reign_victim
+		}
+		trigger_event = st_terror.1001
+	}
+}

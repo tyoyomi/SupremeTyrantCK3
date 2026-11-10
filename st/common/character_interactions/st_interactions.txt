@@ -1,0 +1,310 @@
+### Grant / revoke (when rule allows targets)
+st_grant_supreme_tyrant_interaction = {
+	category = interaction_category_friendly
+	icon = st_grant_supreme_tyrant
+	interface_priority = 58
+	common_interaction = yes
+
+	desc = st_grant_supreme_tyrant_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		has_game_rule = st_rule_granting_player_and_targets
+		scope:actor = {
+			is_alive = yes
+			st_actor_may_bestow_by_rule = yes
+		}
+		scope:recipient = {
+			is_alive = yes
+			is_adult = yes
+			NOT = { has_trait = st_supreme_tyrant }
+			OR = {
+				is_child_of = scope:actor
+				is_grandchild_of = scope:actor
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_can_receive_tyrant
+				is_adult = yes
+				NOT = { has_trait = st_supreme_tyrant }
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			st_embrace_supreme_tyrant_effect = yes
+		}
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+st_revoke_supreme_tyrant_interaction = {
+	category = interaction_category_hostile
+	icon = st_revoke_supreme_tyrant
+	interface_priority = 57
+	common_interaction = yes
+
+	desc = st_revoke_supreme_tyrant_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		has_game_rule = st_rule_granting_player_and_targets
+		scope:actor = {
+			is_alive = yes
+			st_actor_may_bestow_by_rule = yes
+		}
+		scope:recipient = {
+			is_alive = yes
+			has_trait = st_supreme_tyrant
+			OR = {
+				is_child_of = scope:actor
+				is_grandchild_of = scope:actor
+				this = scope:actor
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			st_renounce_supreme_tyrant_effect = yes
+		}
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+### 4 — Arbitrary Arrest
+st_arbitrary_arrest_interaction = {
+	category = interaction_category_hostile
+	icon = st_arbitrary_arrest
+	interface_priority = 92
+	common_interaction = yes
+
+	desc = st_arbitrary_arrest_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		st_can_arbitrary_arrest = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = st_tt_can_arbitrary_arrest
+				st_is_supreme_tyrant = yes
+				st_module_arrest_on = yes
+				NOT = { has_character_flag = st_arrest_cd }
+			}
+		}
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_arrest_target_valid
+				is_imprisoned = no
+			}
+		}
+	}
+
+	cost = {
+		prestige = {
+			value = st_arrest_prestige_cost_value
+		}
+	}
+
+	on_accept = {
+		st_arbitrary_arrest_effect = yes
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+### 3 — Public Execution Spectacle
+st_public_execution_interaction = {
+	category = interaction_category_hostile
+	icon = st_public_execution
+	interface_priority = 93
+	common_interaction = yes
+
+	desc = st_public_execution_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		st_can_public_execution = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = st_tt_can_public_execution
+				st_is_supreme_tyrant = yes
+				st_module_execution_on = yes
+				NOT = { has_character_flag = st_execution_cd }
+			}
+		}
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_prisoner_of_actor
+				is_imprisoned_by = scope:actor
+			}
+		}
+	}
+
+	on_accept = {
+		st_public_execution_effect = yes
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+### 2 — Crush Dissent
+st_crush_dissent_interaction = {
+	category = interaction_category_hostile
+	icon = st_crush_dissent
+	interface_priority = 91
+	common_interaction = yes
+
+	desc = st_crush_dissent_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		st_can_crush_dissent = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = st_tt_can_crush_dissent
+				st_is_supreme_tyrant = yes
+				st_module_crush_dissent_on = yes
+				NOT = { has_character_flag = st_crush_cd }
+			}
+		}
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_vassal_faction_against_you
+				st_recipient_in_vassal_faction_against_actor = yes
+			}
+		}
+	}
+
+	on_accept = {
+		st_crush_dissent_effect = yes
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+### 6 — Confiscate Under Dread
+st_confiscate_under_dread_interaction = {
+	category = interaction_category_hostile
+	icon = st_confiscate_under_dread
+	interface_priority = 90
+	common_interaction = yes
+
+	desc = st_confiscate_under_dread_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		st_can_confiscate_under_dread = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = st_tt_can_confiscate
+				st_is_supreme_tyrant = yes
+				st_module_confiscate_on = yes
+				NOT = { has_character_flag = st_confiscate_cd }
+			}
+		}
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_confiscate_target_valid
+				is_landed = yes
+				is_vassal_of = scope:actor
+			}
+		}
+	}
+
+	cost = {
+		prestige = {
+			value = st_confiscate_prestige_cost_value
+		}
+	}
+
+	on_accept = {
+		st_confiscate_under_dread_effect = yes
+	}
+
+	ai_will_do = { base = 0 }
+}
+
+### 8 — Force Oath of Fear
+st_force_oath_of_fear_interaction = {
+	category = interaction_category_hostile
+	icon = st_force_oath_of_fear
+	interface_priority = 89
+	common_interaction = yes
+
+	desc = st_force_oath_of_fear_interaction_desc
+
+	auto_accept = {
+		custom_description = {
+			text = st_tt_high_auto_accept
+			subject = scope:actor
+			object = scope:recipient
+			scope:actor = { st_intensity_is_high = yes }
+		}
+	}
+
+	is_shown = {
+		st_can_force_oath_of_fear = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = st_tt_can_force_oath
+				st_is_supreme_tyrant = yes
+				st_module_oath_on = yes
+				NOT = { has_character_flag = st_oath_cd }
+			}
+		}
+		scope:recipient = {
+			custom_tooltip = {
+				text = st_tt_oath_target_valid
+				is_landed = yes
+				is_vassal_of = scope:actor
+			}
+		}
+	}
+
+	on_accept = {
+		st_force_oath_of_fear_effect = yes
+	}
+
+	ai_accept = {
+		base = 10
+		st_fear_ai_accept_modifier = yes
+		modifier = {
+			add = 40
+			scope:actor = { st_intensity_is_mid = yes }
+		}
+		modifier = {
+			add = 1000
+			scope:actor = { st_intensity_is_high = yes }
+		}
+		modifier = {
+			add = -40
+			scope:actor = { st_intensity_is_low = yes }
+			scope:actor = { dread < 40 }
+		}
+	}
+
+	ai_will_do = { base = 0 }
+}

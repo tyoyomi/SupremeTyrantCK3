@@ -1,0 +1,29 @@
+# Supreme Tyrant — append-only hooks
+
+on_death = {
+	on_actions = { st_on_death }
+}
+
+st_on_death = {
+	effect = {
+		st_on_death_cleanup_effect = yes
+	}
+}
+
+yearly_playable_pulse = {
+	on_actions = {
+		st_yearly_playable_pulse
+	}
+}
+
+st_yearly_playable_pulse = {
+	trigger = {
+		is_alive = yes
+		has_trait = st_supreme_tyrant
+	}
+	effect = {
+		st_reign_of_terror_yearly_pulse = yes
+		st_oath_hygiene_yearly_effect = yes
+		st_refresh_tyrant_modifiers_effect = yes
+	}
+}

@@ -1,0 +1,340 @@
+namespace = st_settings
+
+# Silence the Realm — page 1 (Done first; SS overflow craft)
+st_settings.1001 = {
+	type = character_event
+	title = st_settings.1001.t
+	theme = dread
+
+	desc = {
+		desc = st_settings.1001.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_intensity = 1 }
+				desc = st_settings.tier.intensity_1
+			}
+			triggered_desc = {
+				trigger = { var:st_cfg_intensity = 2 }
+				desc = st_settings.tier.intensity_2
+			}
+			triggered_desc = {
+				trigger = { var:st_cfg_intensity = 3 }
+				desc = st_settings.tier.intensity_3
+			}
+			desc = st_settings.tier.intensity_3
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_absolute_tyranny = 1 }
+				desc = st_settings.module.absolute_tyranny_on
+			}
+			desc = st_settings.module.absolute_tyranny_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_arrest = 1 }
+				desc = st_settings.module.arrest_on
+			}
+			desc = st_settings.module.arrest_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_execution = 1 }
+				desc = st_settings.module.execution_on
+			}
+			desc = st_settings.module.execution_off
+		}
+		desc = st_settings.1001.desc_dread
+		desc = st_settings.1001.desc_footer
+	}
+
+	immediate = {
+		st_ensure_tyrant_defaults_effect = yes
+	}
+
+	option = {
+		name = st_settings.1001.close
+		custom_tooltip = st_settings.tt.close
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_intensity = 1 }
+						desc = st_settings.opt.intensity_1
+					}
+					triggered_desc = {
+						trigger = { var:st_cfg_intensity = 2 }
+						desc = st_settings.opt.intensity_2
+					}
+					triggered_desc = {
+						trigger = { var:st_cfg_intensity = 3 }
+						desc = st_settings.opt.intensity_3
+					}
+					desc = st_settings.opt.intensity_3
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.intensity
+		st_cycle_intensity_cfg_effect = yes
+		trigger_event = st_settings.1001
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_absolute_tyranny = 1 }
+						desc = st_settings.opt.absolute_tyranny_on
+					}
+					desc = st_settings.opt.absolute_tyranny_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.absolute_tyranny
+		st_cycle_module_absolute_tyranny_cfg_effect = yes
+		trigger_event = st_settings.1001
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_arrest = 1 }
+						desc = st_settings.opt.arrest_on
+					}
+					desc = st_settings.opt.arrest_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.arrest
+		st_cycle_module_arrest_cfg_effect = yes
+		trigger_event = st_settings.1001
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_execution = 1 }
+						desc = st_settings.opt.execution_on
+					}
+					desc = st_settings.opt.execution_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.execution
+		st_cycle_module_execution_cfg_effect = yes
+		trigger_event = st_settings.1001
+	}
+
+	option = {
+		name = st_settings.1001.more
+		custom_tooltip = st_settings.tt.more
+		trigger_event = st_settings.1002
+	}
+}
+
+# Page 2 — remaining modules + Mass Terror / Crush / cowed readout
+st_settings.1002 = {
+	type = character_event
+	title = st_settings.1002.t
+	theme = dread
+
+	desc = {
+		desc = st_settings.1002.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_crush_dissent = 1 }
+				desc = st_settings.module.crush_dissent_on
+			}
+			desc = st_settings.module.crush_dissent_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_confiscate = 1 }
+				desc = st_settings.module.confiscate_on
+			}
+			desc = st_settings.module.confiscate_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_oath = 1 }
+				desc = st_settings.module.oath_on
+			}
+			desc = st_settings.module.oath_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_reign_pulse = 1 }
+				desc = st_settings.module.reign_pulse_on
+			}
+			desc = st_settings.module.reign_pulse_off
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:st_cfg_module_mass_terror = 1 }
+				desc = st_settings.module.mass_terror_on
+			}
+			desc = st_settings.module.mass_terror_off
+		}
+		desc = st_settings.1002.desc_cowed
+		desc = st_settings.1002.desc_footer
+	}
+
+	immediate = {
+		st_ensure_tyrant_defaults_effect = yes
+	}
+
+	option = {
+		name = st_settings.1001.close
+		custom_tooltip = st_settings.tt.close
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_crush_dissent = 1 }
+						desc = st_settings.opt.crush_dissent_on
+					}
+					desc = st_settings.opt.crush_dissent_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.crush_dissent
+		st_cycle_module_crush_dissent_cfg_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_confiscate = 1 }
+						desc = st_settings.opt.confiscate_on
+					}
+					desc = st_settings.opt.confiscate_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.confiscate
+		st_cycle_module_confiscate_cfg_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_oath = 1 }
+						desc = st_settings.opt.oath_on
+					}
+					desc = st_settings.opt.oath_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.oath
+		st_cycle_module_oath_cfg_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_reign_pulse = 1 }
+						desc = st_settings.opt.reign_pulse_on
+					}
+					desc = st_settings.opt.reign_pulse_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.reign_pulse
+		st_cycle_module_reign_pulse_cfg_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { var:st_cfg_module_mass_terror = 1 }
+						desc = st_settings.opt.mass_terror_on
+					}
+					desc = st_settings.opt.mass_terror_off
+				}
+			}
+		}
+		custom_tooltip = st_settings.tt.mass_terror_module
+		st_cycle_module_mass_terror_cfg_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = st_settings.1002.mass_terror
+		custom_tooltip = st_settings.tt.mass_terror
+		trigger = {
+			has_trait = st_supreme_tyrant
+			st_can_mass_terror = yes
+		}
+		st_mass_terror_effect = yes
+	}
+
+	option = {
+		name = st_settings.1002.mass_terror_factions
+		custom_tooltip = st_settings.tt.mass_terror_factions
+		trigger = {
+			has_trait = st_supreme_tyrant
+			st_can_mass_terror = yes
+		}
+		st_mass_terror_faction_members_effect = yes
+	}
+
+	option = {
+		name = st_settings.1002.spread_terror
+		custom_tooltip = st_settings.tt.spread_terror
+		trigger = {
+			has_trait = st_supreme_tyrant
+			st_module_mass_terror_on = yes
+			NOT = { st_intensity_is_low = yes }
+			NOT = { has_character_flag = st_spread_terror_cd }
+		}
+		st_spread_terror_effect = yes
+		trigger_event = st_settings.1002
+	}
+
+	option = {
+		name = st_settings.1002.crush_active
+		custom_tooltip = st_settings.tt.crush_active
+		trigger = {
+			has_trait = st_supreme_tyrant
+			st_module_crush_dissent_on = yes
+			NOT = { has_character_flag = st_crush_cd }
+			any_vassal = {
+				is_alive = yes
+				exists = joined_faction
+				joined_faction = {
+					faction_target = prev
+				}
+			}
+		}
+		st_crush_active_dissent_hub_effect = yes
+	}
+
+	option = {
+		name = st_settings.1001.back
+		custom_tooltip = st_settings.tt.back
+		trigger_event = st_settings.1001
+	}
+}

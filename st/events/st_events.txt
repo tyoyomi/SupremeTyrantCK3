@@ -1,0 +1,166 @@
+namespace = st_events
+
+# Embrace toast
+st_events.1001 = {
+	type = character_event
+	title = st_events.1001.t
+	desc = st_events.1001.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+
+	option = {
+		name = st_events.1001.a
+	}
+}
+
+# Renounce toast
+st_events.1002 = {
+	type = character_event
+	title = st_events.1002.t
+	desc = st_events.1002.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = dismissal
+	}
+
+	option = {
+		name = st_events.1002.a
+	}
+}
+
+# Arbitrary Arrest
+st_events.2001 = {
+	type = character_event
+	title = st_events.2001.t
+	desc = st_events.2001.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = scope:recipient
+
+	option = {
+		name = st_events.2001.a
+	}
+}
+
+# Public Execution Spectacle
+st_events.2101 = {
+	type = character_event
+	title = st_events.2101.t
+	desc = st_events.2101.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = personality_cruel
+	}
+
+	option = {
+		name = st_events.2101.a
+	}
+}
+
+# Crush Dissent
+st_events.2201 = {
+	type = character_event
+	title = st_events.2201.t
+	desc = st_events.2201.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = scope:recipient
+
+	option = {
+		name = st_events.2201.a
+	}
+}
+
+# Confiscate Under Dread
+st_events.2301 = {
+	type = character_event
+	title = st_events.2301.t
+	desc = st_events.2301.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = personality_greedy
+	}
+	right_portrait = scope:recipient
+
+	option = {
+		name = st_events.2301.a
+	}
+}
+
+# Mass Terror
+st_events.2401 = {
+	type = character_event
+	title = st_events.2401.t
+	desc = st_events.2401.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_cruel
+	}
+
+	option = {
+		name = st_events.2401.a
+	}
+}
+
+# Mass Terror (faction members)
+st_events.2402 = {
+	type = character_event
+	title = st_events.2402.t
+	desc = st_events.2402.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_cruel
+	}
+
+	option = {
+		name = st_events.2402.a
+	}
+}
+
+# Spread Terror (mild)
+st_events.2403 = {
+	type = character_event
+	title = st_events.2403.t
+	desc = st_events.2403.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = scope:recipient
+
+	option = {
+		name = st_events.2403.a
+	}
+}
+
+# Force Oath of Fear
+st_events.2501 = {
+	type = character_event
+	title = st_events.2501.t
+	desc = st_events.2501.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = scope:recipient
+
+	option = {
+		name = st_events.2501.a
+	}
+}

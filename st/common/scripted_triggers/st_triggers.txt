@@ -1,0 +1,446 @@
+# Supreme Tyrant — scripted triggers
+
+st_is_supreme_tyrant = {
+	has_trait = st_supreme_tyrant
+}
+
+st_granting_disabled = {
+	has_game_rule = st_rule_granting_disabled
+}
+
+st_can_embrace_tyrant = {
+	is_alive = yes
+	is_adult = yes
+	NOT = { has_game_rule = st_rule_granting_disabled }
+	NOT = { has_trait = st_supreme_tyrant }
+	trigger_if = {
+		limit = { has_game_rule = st_rule_granting_player_self }
+		is_ai = no
+	}
+	trigger_else_if = {
+		limit = { has_game_rule = st_rule_granting_player_and_targets }
+		OR = {
+			is_ai = no
+			has_game_rule = st_rule_ai_follow_intensity
+		}
+	}
+	trigger_else = {
+		always = no
+	}
+}
+
+st_actor_may_bestow_by_rule = {
+	NOT = { has_game_rule = st_rule_granting_disabled }
+	has_game_rule = st_rule_granting_player_and_targets
+	trigger_if = {
+		limit = { is_ai = yes }
+		has_game_rule = st_rule_ai_follow_intensity
+	}
+}
+
+st_ai_may_use_tyrant = {
+	OR = {
+		is_ai = no
+		has_game_rule = st_rule_ai_follow_intensity
+	}
+}
+
+st_intensity_is_low = {
+	exists = var:st_cfg_intensity
+	var:st_cfg_intensity = 1
+}
+
+st_intensity_is_mid = {
+	exists = var:st_cfg_intensity
+	var:st_cfg_intensity = 2
+}
+
+st_intensity_is_high = {
+	OR = {
+		NOT = { exists = var:st_cfg_intensity }
+		var:st_cfg_intensity = 3
+	}
+}
+
+### Modules
+st_module_absolute_tyranny_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_absolute_tyranny
+			var:st_cfg_module_absolute_tyranny = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_absolute_tyranny }
+			has_game_rule = st_rule_module_absolute_tyranny_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_absolute_tyranny
+			var:st_cfg_module_absolute_tyranny = 0
+		}
+	}
+}
+
+st_module_crush_dissent_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_crush_dissent
+			var:st_cfg_module_crush_dissent = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_crush_dissent }
+			has_game_rule = st_rule_module_crush_dissent_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_crush_dissent
+			var:st_cfg_module_crush_dissent = 0
+		}
+	}
+}
+
+st_module_execution_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_execution
+			var:st_cfg_module_execution = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_execution }
+			has_game_rule = st_rule_module_execution_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_execution
+			var:st_cfg_module_execution = 0
+		}
+	}
+}
+
+st_module_arrest_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_arrest
+			var:st_cfg_module_arrest = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_arrest }
+			has_game_rule = st_rule_module_arrest_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_arrest
+			var:st_cfg_module_arrest = 0
+		}
+	}
+}
+
+st_module_reign_pulse_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_reign_pulse
+			var:st_cfg_module_reign_pulse = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_reign_pulse }
+			has_game_rule = st_rule_module_reign_pulse_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_reign_pulse
+			var:st_cfg_module_reign_pulse = 0
+		}
+	}
+}
+
+st_module_confiscate_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_confiscate
+			var:st_cfg_module_confiscate = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_confiscate }
+			has_game_rule = st_rule_module_confiscate_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_confiscate
+			var:st_cfg_module_confiscate = 0
+		}
+	}
+}
+
+st_module_oath_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_oath
+			var:st_cfg_module_oath = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_oath }
+			has_game_rule = st_rule_module_oath_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_oath
+			var:st_cfg_module_oath = 0
+		}
+	}
+}
+
+st_module_mass_terror_on = {
+	OR = {
+		AND = {
+			exists = var:st_cfg_module_mass_terror
+			var:st_cfg_module_mass_terror = 1
+		}
+		AND = {
+			NOT = { exists = var:st_cfg_module_mass_terror }
+			has_game_rule = st_rule_module_mass_terror_on
+		}
+	}
+	NOT = {
+		AND = {
+			exists = var:st_cfg_module_mass_terror
+			var:st_cfg_module_mass_terror = 0
+		}
+	}
+}
+
+### Cowed / oath
+st_character_is_cowed_trigger = {
+	has_character_modifier = st_cowed_modifier
+	exists = var:st_cowed_by
+}
+
+st_is_cowed_by_actor = {
+	scope:recipient = {
+		st_character_is_cowed_trigger = yes
+		var:st_cowed_by = scope:actor
+	}
+}
+
+st_has_oath_of_fear = {
+	has_character_modifier = st_oath_of_fear_modifier
+	exists = var:st_oath_to
+}
+
+st_recipient_has_oath_to_actor = {
+	scope:recipient = {
+		st_has_oath_of_fear = yes
+		var:st_oath_to = scope:actor
+	}
+}
+
+### Faction
+st_is_player_vassal_faction_leader = {
+	scope:recipient = {
+		is_alive = yes
+		is_vassal_of = scope:actor
+		exists = joined_faction
+		joined_faction = {
+			faction_target = scope:actor
+			faction_leader = scope:recipient
+		}
+	}
+}
+
+st_recipient_in_vassal_faction_against_actor = {
+	scope:recipient = {
+		is_alive = yes
+		is_vassal_of = scope:actor
+		exists = joined_faction
+		joined_faction = {
+			faction_target = scope:actor
+		}
+	}
+}
+
+### Target helpers
+st_recipient_is_direct_vassal_or_courtier = {
+	scope:recipient = {
+		is_alive = yes
+		is_adult = yes
+		NOT = { this = scope:actor }
+		OR = {
+			is_vassal_of = scope:actor
+			is_courtier_of = scope:actor
+		}
+	}
+}
+
+st_recipient_in_actor_realm_bound = {
+	scope:recipient = {
+		is_alive = yes
+		is_adult = yes
+		NOT = { this = scope:actor }
+		OR = {
+			is_vassal_of = scope:actor
+			is_courtier_of = scope:actor
+			is_vassal_or_below_of = scope:actor
+			AND = {
+				exists = liege
+				liege = {
+					OR = {
+						this = scope:actor
+						is_vassal_or_below_of = scope:actor
+					}
+				}
+			}
+		}
+	}
+}
+
+### Verb gates
+st_can_arbitrary_arrest = {
+	scope:actor = {
+		st_is_supreme_tyrant = yes
+		st_module_arrest_on = yes
+		st_ai_may_use_tyrant = yes
+		is_landed = yes
+		NOT = { has_character_flag = st_arrest_cd }
+		# Low: require solid dread floor
+		trigger_if = {
+			limit = { st_intensity_is_low = yes }
+			dread >= 40
+		}
+	}
+	scope:recipient = {
+		is_alive = yes
+		is_adult = yes
+		NOT = { this = scope:actor }
+		is_imprisoned = no
+		NOT = { is_imprisoned_by = scope:actor }
+	}
+	trigger_if = {
+		limit = { scope:actor = { st_intensity_is_high = yes } }
+		st_recipient_in_actor_realm_bound = yes
+	}
+	trigger_else = {
+		st_recipient_is_direct_vassal_or_courtier = yes
+	}
+}
+
+st_can_public_execution = {
+	scope:actor = {
+		st_is_supreme_tyrant = yes
+		st_module_execution_on = yes
+		st_ai_may_use_tyrant = yes
+		is_landed = yes
+		NOT = { has_character_flag = st_execution_cd }
+	}
+	scope:recipient = {
+		is_alive = yes
+		is_imprisoned_by = scope:actor
+	}
+}
+
+st_can_crush_dissent = {
+	scope:actor = {
+		st_is_supreme_tyrant = yes
+		st_module_crush_dissent_on = yes
+		st_ai_may_use_tyrant = yes
+		is_landed = yes
+		NOT = { has_character_flag = st_crush_cd }
+	}
+	st_recipient_in_vassal_faction_against_actor = yes
+}
+
+st_can_confiscate_under_dread = {
+	scope:actor = {
+		st_is_supreme_tyrant = yes
+		st_module_confiscate_on = yes
+		st_ai_may_use_tyrant = yes
+		is_landed = yes
+		NOT = { has_character_flag = st_confiscate_cd }
+	}
+	scope:recipient = {
+		is_alive = yes
+		is_landed = yes
+		is_vassal_of = scope:actor
+		NOT = { this = scope:actor }
+		# Leave at least one county if they hold multiple — avoid total strip as Keep Titles peer
+		any_held_title = {
+			tier = tier_county
+			is_landless_type_title = no
+		}
+	}
+	# Low prefers mild path; Mid/High open county revoke
+	trigger_if = {
+		limit = { scope:actor = { st_intensity_is_low = yes } }
+		scope:actor = { dread >= 50 }
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+st_can_force_oath_of_fear = {
+	scope:actor = {
+		st_is_supreme_tyrant = yes
+		st_module_oath_on = yes
+		st_ai_may_use_tyrant = yes
+		is_landed = yes
+		NOT = { has_character_flag = st_oath_cd }
+	}
+	scope:recipient = {
+		is_alive = yes
+		is_landed = yes
+		is_vassal_of = scope:actor
+		NOT = { this = scope:actor }
+		NOT = {
+			AND = {
+				has_character_modifier = st_oath_of_fear_modifier
+				exists = var:st_oath_to
+				var:st_oath_to = scope:actor
+			}
+		}
+	}
+}
+
+st_can_mass_terror = {
+	# Interaction form (scope:actor) OR hub form (this = tyrant)
+	OR = {
+		AND = {
+			exists = scope:actor
+			scope:actor = {
+				st_is_supreme_tyrant = yes
+				st_module_mass_terror_on = yes
+				st_ai_may_use_tyrant = yes
+				is_landed = yes
+				st_intensity_is_high = yes
+				NOT = { has_character_flag = st_mass_terror_cd }
+			}
+		}
+		AND = {
+			NOT = { exists = scope:actor }
+			st_is_supreme_tyrant = yes
+			st_module_mass_terror_on = yes
+			st_ai_may_use_tyrant = yes
+			is_landed = yes
+			st_intensity_is_high = yes
+			NOT = { has_character_flag = st_mass_terror_cd }
+		}
+	}
+}
+
+st_ssc_present_trigger = {
+	st_ssc_loaded_trigger = yes
+}
+
+st_sd_present_trigger = {
+	st_sd_loaded_trigger = yes
+}
+
+st_actor_has_any_cowed = {
+	exists = var:st_cowed_count
+	var:st_cowed_count >= 1
+}

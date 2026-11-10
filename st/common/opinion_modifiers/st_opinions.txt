@@ -1,0 +1,41 @@
+st_cowed_fear_opinion = {
+	monthly_change = 0.5
+	decaying = yes
+	max = 0
+	opinion = -20
+}
+
+st_crushed_dissent_opinion = {
+	monthly_change = 0.4
+	decaying = yes
+	max = 0
+	opinion = -30
+}
+
+st_oath_of_fear_opinion = {
+	monthly_change = 0.2
+	decaying = yes
+	max = 0
+	opinion = -15
+}
+
+st_spectacle_terror_opinion = {
+	monthly_change = 0.5
+	decaying = yes
+	max = 0
+	opinion = -25
+}
+
+st_confiscated_under_dread_opinion = {
+	monthly_change = 0.3
+	decaying = yes
+	max = 0
+	opinion = -40
+}
+
+st_arbitrary_arrest_opinion = {
+	monthly_change = 0.5
+	decaying = yes
+	max = 0
+	opinion = -35
+}

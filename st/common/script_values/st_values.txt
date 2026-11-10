@@ -1,0 +1,150 @@
+# Supreme Tyrant — intensity-aware dread / duration / cost values
+
+@st_cowed_days_low = 180
+@st_cowed_days_mid = 365
+@st_cowed_days_high = 730
+
+@st_crushed_days_low = 90
+@st_crushed_days_mid = 180
+@st_crushed_days_high = 365
+
+@st_oath_days_low = 365
+@st_oath_days_mid = 730
+@st_oath_days_high = 1825
+
+@st_dread_splash_low = 10
+@st_dread_splash_mid = 20
+@st_dread_splash_high = 35
+
+@st_execution_dread_low = 15
+@st_execution_dread_mid = 30
+@st_execution_dread_high = 50
+
+@st_reign_dread_low = 5
+@st_reign_dread_mid = 10
+@st_reign_dread_high = 20
+
+@st_mass_terror_dread = 25
+@st_spread_terror_dread = 8
+
+@st_oath_dread_floor = 20
+
+@st_arrest_prestige_low = 100
+@st_arrest_prestige_mid = 50
+@st_arrest_prestige_high = 15
+
+@st_confiscate_prestige_low = 150
+@st_confiscate_prestige_mid = 75
+@st_confiscate_prestige_high = 25
+
+@st_tyranny_soft_low = 5
+@st_tyranny_soft_mid = 2
+@st_tyranny_soft_high = 0
+
+st_cowed_duration_days_value = {
+	value = @st_cowed_days_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_cowed_days_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_cowed_days_mid
+	}
+}
+
+st_crushed_duration_days_value = {
+	value = @st_crushed_days_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_crushed_days_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_crushed_days_mid
+	}
+}
+
+st_oath_duration_days_value = {
+	value = @st_oath_days_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_oath_days_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_oath_days_mid
+	}
+}
+
+st_dread_splash_value = {
+	value = @st_dread_splash_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_dread_splash_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_dread_splash_mid
+	}
+}
+
+st_execution_dread_value = {
+	value = @st_execution_dread_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_execution_dread_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_execution_dread_mid
+	}
+}
+
+st_reign_dread_value = {
+	value = @st_reign_dread_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_reign_dread_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_reign_dread_mid
+	}
+}
+
+st_arrest_prestige_cost_value = {
+	value = @st_arrest_prestige_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_arrest_prestige_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_arrest_prestige_mid
+	}
+}
+
+st_confiscate_prestige_cost_value = {
+	value = @st_confiscate_prestige_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_confiscate_prestige_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_confiscate_prestige_mid
+	}
+}
+
+st_tyranny_soft_land_value = {
+	value = @st_tyranny_soft_high
+	if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 1 }
+		set = @st_tyranny_soft_low
+	}
+	else_if = {
+		limit = { exists = var:st_cfg_intensity var:st_cfg_intensity = 2 }
+		set = @st_tyranny_soft_mid
+	}
+}

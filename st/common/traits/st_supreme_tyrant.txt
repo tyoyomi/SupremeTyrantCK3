@@ -1,0 +1,26 @@
+@st_intrigue = 28
+@st_other_skill = 12
+@st_trait_dread = 1
+@st_trait_dread_baseline = 10
+
+st_supreme_tyrant = {
+	category = fame
+	random_creation = 0
+	genetic = no
+	immortal = no
+	good = yes
+	shown_in_ruler_designer = yes
+
+	flag = st_is_supreme_tyrant
+
+	intrigue = @st_intrigue
+	diplomacy = @st_other_skill
+	martial = @st_other_skill
+	stewardship = @st_other_skill
+	learning = @st_other_skill
+	prowess = @st_other_skill
+
+	# Intrigue / dread specialist — personal sheet stays well below Supreme Sovereign
+	monthly_dread = @st_trait_dread
+	dread_baseline_add = @st_trait_dread_baseline
+}

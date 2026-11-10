@@ -1,0 +1,64 @@
+# Supreme Tyrant — Absolute Tyranny intensity sheet + fear theater modifiers
+
+@st_intrigue_low = 5
+@st_intrigue_med = 10
+@st_intrigue_high = 15
+@st_dread_base_low = 15
+@st_dread_base_med = 35
+@st_dread_base_high = 60
+@st_dread_loss_low = -25
+@st_dread_loss_med = -50
+@st_dread_loss_high = -80
+@st_monthly_dread_low = 0.5
+@st_monthly_dread_med = 1.5
+@st_monthly_dread_high = 3
+@st_vassal_op_low = 10
+@st_vassal_op_med = 20
+@st_vassal_op_high = 35
+
+# Absolute Tyranny personal sheet (intensity) — dread floor + soft opinion land, not SS demigod
+st_tyranny_low_modifier = {
+	intrigue = @st_intrigue_low
+	dread_baseline_add = @st_dread_base_low
+	dread_loss_mult = @st_dread_loss_low
+	monthly_dread = @st_monthly_dread_low
+	vassal_opinion = @st_vassal_op_low
+}
+
+st_tyranny_med_modifier = {
+	intrigue = @st_intrigue_med
+	dread_baseline_add = @st_dread_base_med
+	dread_loss_mult = @st_dread_loss_med
+	monthly_dread = @st_monthly_dread_med
+	vassal_opinion = @st_vassal_op_med
+}
+
+st_tyranny_high_modifier = {
+	intrigue = @st_intrigue_high
+	dread_baseline_add = @st_dread_base_high
+	dread_loss_mult = @st_dread_loss_high
+	monthly_dread = @st_monthly_dread_high
+	vassal_opinion = @st_vassal_op_high
+}
+
+# Timed cowed / terrified toward the Tyrant (directed via var:st_cowed_by)
+st_cowed_modifier = {
+	icon = st_cowed_modifier
+	dread_baseline_add = 5
+	monthly_prestige = -0.05
+}
+
+# Short Crushed after Crush Dissent
+st_crushed_modifier = {
+	icon = st_crushed_modifier
+	monthly_prestige = -0.1
+	dread_baseline_add = 10
+}
+
+# Force Oath of Fear — sticky terrified subject lean (soft faction hesitation via opinion / cow theater)
+st_oath_of_fear_modifier = {
+	icon = st_oath_of_fear_modifier
+	monthly_prestige = -0.1
+	dread_baseline_add = 15
+	general_opinion = -5
+}
