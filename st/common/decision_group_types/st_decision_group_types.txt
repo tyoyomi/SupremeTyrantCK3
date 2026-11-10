@@ -1,0 +1,7 @@
+# Supreme Tyrant — custom decision group (additive; does not replace vanilla major)
+
+st_tyrant = {
+	sort_order = 193
+	gui_tags = { big_button }
+	important_decision_group = yes
+}
